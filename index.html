@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <title>Shameel</title>
+    <head>
+        <style>
+            body{
+                    display:flex;          
+        </style>
+        <script>
+            
+            var pr1=5;
+            var pr2=10;
+            var pr3=15;
+            function Initial_Price(){
+                document.getElementById("span1").innerHTML="Price: $"+pr1;
+                document.getElementById("span2").innerHTML="Price: $"+pr2;
+                document.getElementById("span3").innerHTML="Price: $"+pr3;
+            }
+            function Calc_Price(){
+                //Variables
+                var output=document.getElementById("output");
+                var WhPr1=3;
+                var WhPr2=5;
+                var WhPr3=8;
+                var pr1=5;
+                var pr2=10;
+                var pr3=15;
+                var qt1=parseInt(document.getElementById("qt1").value);
+                var qt2=parseInt(document.getElementById("qt2").value);
+                var qt3=parseInt(document.getElementById("qt3").value);
+                var Company_Subtotal=(WhPr1*qt1)+(WhPr2*qt2)+(WhPr3*qt3);
+                //Calculations
+                var Customer_Subtotal=parseFloat((pr1*qt1)+(pr2*qt2)+(pr3*qt3));
+                var taxrate=0.0875;
+                var tax=parseFloat(Customer_Subtotal*taxrate).toFixed(2);
+                var shipping;
+                //Determining Shipping
+                if (Customer_Subtotal<100){
+                    shipping=25;
+                }else if (Customer_Subtotal>=100 && Customer_Subtotal<200){
+                    shipping=10;
+                }else{
+                    shipping=0;
+                }
+                var Total=parseFloat(Customer_Subtotal+tax+shipping);
+                Total=Total.toFixed(2);
+                var Profit=Customer_Subtotal-Company_Subtotal;
+                var build="";//Build for Customer Info
+                build+="<div>CUSTOMER INFO:<br>";
+                build+="-------------<br>";
+                build+="Subtotal: $"+Customer_Subtotal+"<br>";
+                build+="Tax: $"+tax+"<br>";
+                build+="Shipping: $"+shipping+"<br>";
+                build+="Total: $"+Total+"<br>";
+                build+="COMPANY INFO:<br>";//Adding Company Info to build
+                build+="-------------<br>";
+                build+="Customer Subtotal: $"+Customer_Subtotal+"<br>";
+                build+="Company Subtotal: $"+Company_Subtotal+"<br>";
+                build+="Profit: $"+Profit+"<br>";
+                build+="Total Items Sold: "+(qt1+qt2+qt3)+"</div>";
+                output.innerHTML=build;
+            }
+        </script>
+    </head>
+    <body onload="Initial_Price()">
+        <h1 style="background-color:rgb(150, 5, 0)">Rolex Shop</h1><!-- Page title with color-->
+        <div>
+            <h3 style="background-color:rgb(231, 191, 13)">Iced Out Rolex</h3><!--Subtitles with different color-->
+            <h1 style="border:2px solid Tomato;">Gold with Diamond studs</h1>
+            <br>
+            <img src="rolex.jpg" height="200" width="200">
+            <br>
+            <p>Good for looking sharp at fancy occasions.</p>
+            <br>
+            <input type="text" id="qt1" placeholder="Quantity: ">
+            <span id="span1"></span>
+            <br>
+        </div>
+        <div>
+            <h3 style="background-color:rgb(20, 27, 136)">Buisness Rolex</h3>
+            <h1 style="border:2px solid Tomato;">Diamond Studs only with Silver lining</h1>
+            <br>
+            <img src="roly.jpg" height="200" width="200">
+            <br>
+            <p>Good for any type of work day and business days.</p><!-- Item description-->
+            <br>
+            <input type="text" id="qt2" placeholder="Quantity: ">
+            <span id="span2"></span>
+            <br>
+        </div>
+        <div>       <!-- Displaying items-->
+            <h3 style="background-color:rgb(194, 74, 188)">Womens Rolex</h3>
+            <h1 style="border:2px solid Tomato;">Rose Gold Surroundings</h1>
+            <br>
+            <img src="women.jpg" height="200" width="200">
+            <br>
+            <p>For your wife to stay sharp.</p>
+            <br>
+            <input type="text" id="qt3" placeholder="Quantity: ">
+            <span id="span3"></span>
+        </div>
+        <button onclick="Calc_Price()">PROCESS ORDER</button>
+        <div id="output"></div>
+        <p><a href="https://www.rolex.com/">Visit our secondary site here for more information</a></p>
+    </body>
+</html>
